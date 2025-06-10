@@ -1,38 +1,350 @@
-<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grow a Garden Stock Info</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-      background: #f0f8f0;
-      color: #333;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    h1 { color: #2a7a2a; }
-    section { margin-bottom: 20px; }
-    ul { padding-left: 20px; }
-    li { margin-bottom: 5px; }
-    .loading { color: gray; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      line-height: 1.6;
+      background: #fafafa;
+      color: #1a1a1a;
+      min-height: 100vh;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .header-images {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .header-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 16px;
+      object-fit: cover;
+      border: 3px solid #e8e8e8;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .header-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border-color: #2d5a2d;
+    }
+
+    .roblox-logo {
+      color: #00a2ff;
+      font-size: 2.5rem;
+      margin: 0 1rem;
+      vertical-align: middle;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2d5a2d;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .emoji {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    #updated {
+      font-size: 0.95rem;
+      color: #666;
+      font-weight: 500;
+      background: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      display: inline-block;
+      border: 1px solid #e8e8e8;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .shop-card {
+      background: white;
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid #e8e8e8;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shop-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      border-color: #d0d0d0;
+    }
+
+    .shop-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--accent-color);
+    }
+
+    .shop-card.seed::before { --accent-color: #4ade80; }
+    .shop-card.gear::before { --accent-color: #60a5fa; }
+    .shop-card.egg::before { --accent-color: #fbbf24; }
+
+    .shop-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .shop-icon {
+      font-size: 2rem;
+      margin-right: 0.75rem;
+    }
+
+    .shop-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      letter-spacing: -0.01em;
+    }
+
+    .stock-list {
+      list-style: none;
+      space-y: 0.5rem;
+    }
+
+    .stock-item {
+      padding: 0.875rem 1rem;
+      background: #f8f9fa;
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+      color: #2a2a2a;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .stock-item:hover {
+      background: #f0f1f3;
+      border-color: #e0e0e0;
+      transform: translateX(4px);
+    }
+
+    .stock-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .loading-state {
+      color: #999;
+      font-style: italic;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .empty-state {
+      color: #666;
+      text-align: center;
+      padding: 2rem;
+      font-weight: 500;
+    }
+
+    .error-state {
+      color: #dc2626;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .header-images {
+        gap: 1rem;
+      }
+
+      .header-image {
+        width: 80px;
+        height: 80px;
+      }
+
+      .roblox-logo {
+        font-size: 2rem;
+        margin: 0 0.5rem;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .shop-card {
+        padding: 1.5rem;
+      }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #0f0f0f;
+        color: #e5e5e5;
+      }
+
+      .shop-card {
+        background: #1a1a1a;
+        border-color: #2a2a2a;
+      }
+
+      .shop-card:hover {
+        border-color: #404040;
+      }
+
+      #updated {
+        background: #1a1a1a;
+        border-color: #2a2a2a;
+        color: #b5b5b5;
+      }
+
+      .stock-item {
+        background: #262626;
+        color: #d4d4d4;
+      }
+
+      .stock-item:hover {
+        background: #303030;
+        border-color: #404040;
+      }
+
+      h1 {
+        color: #4ade80;
+      }
+
+      .shop-title {
+        color: #e5e5e5;
+      }
+    }
+
+    /* Smooth animations */
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>🌱 Grow a Garden Stock Info</h1>
-  <p id="updated">Memuat data...</p>
-  <section>
-    <h2>🪴 Seed Shop</h2>
-    <ul id="seedShop"><li class="loading">Loading...</li></ul>
-  </section>
-  <section>
-    <h2>🛠️ Gear Shop</h2>
-    <ul id="gearShop"><li class="loading">Loading...</li></ul>
-  </section>
-  <section>
-    <h2>🥚 Egg Shop</h2>
-    <ul id="eggShop"><li class="loading">Loading...</li></ul>
-  </section>
+  <div class="container">
+    <header>
+      <div class="header-images">
+        <img src="https://files.catbox.moe/ip2ps7.jpg" alt="Garden Game Screenshot 1" class="header-image">
+        <img src="https://files.catbox.moe/clq897.jpg" alt="Garden Game Screenshot 2" class="header-image">
+      </div>
+      
+      <span class="emoji">🌱</span>
+      <h1>
+        <i class="fab fa-roblox roblox-logo"></i>
+        Grow a Garden Stock Info
+        <i class="fab fa-roblox roblox-logo"></i>
+      </h1>
+      <p id="updated">Memuat data...</p>
+    </header>
+
+    <div class="grid">
+      <div class="shop-card seed">
+        <div class="shop-header">
+          <span class="shop-icon">🪴</span>
+          <h2 class="shop-title">Seed Shop</h2>
+        </div>
+        <ul id="seedShop" class="stock-list">
+          <li class="loading-state">Loading...</li>
+        </ul>
+      </div>
+
+      <div class="shop-card gear">
+        <div class="shop-header">
+          <span class="shop-icon">🛠️</span>
+          <h2 class="shop-title">Gear Shop</h2>
+        </div>
+        <ul id="gearShop" class="stock-list">
+          <li class="loading-state">Loading...</li>
+        </ul>
+      </div>
+
+      <div class="shop-card egg">
+        <div class="shop-header">
+          <span class="shop-icon">🥚</span>
+          <h2 class="shop-title">Egg Shop</h2>
+        </div>
+        <ul id="eggShop" class="stock-list">
+          <li class="loading-state">Loading...</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
   <script>
     fetch('/api/stocks')
@@ -44,22 +356,30 @@
           const el = document.getElementById(id);
           el.innerHTML = '';
           if (items.length === 0) {
-            el.innerHTML = '<li>Kosong</li>';
+            el.innerHTML = '<li class="empty-state">Kosong</li>';
           } else {
-            items.forEach(item => {
+            items.forEach((item, index) => {
               const li = document.createElement('li');
+              li.className = 'stock-item fade-in';
+              li.style.animationDelay = `${index * 0.1}s`;
               li.textContent = item;
               el.appendChild(li);
             });
           }
         };
 
+        // Add fade-in animation to cards
+        document.querySelectorAll('.shop-card').forEach((card, index) => {
+          card.classList.add('fade-in');
+          card.style.animationDelay = `${index * 0.2}s`;
+        });
+
         fillList('seedShop', data.seed);
         fillList('gearShop', data.gear);
         fillList('eggShop', data.egg);
       })
       .catch(err => {
-        document.getElementById('updated').innerText = '❌ Gagal mengambil data.';
+        document.getElementById('updated').innerHTML = '<span class="error-state">❌ Gagal mengambil data</span>';
         console.error(err);
       });
   </script>
