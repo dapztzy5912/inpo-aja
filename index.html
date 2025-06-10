@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grow a Garden Stock Info</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f0f8f0;
+      color: #333;
+    }
+    h1 { color: #2a7a2a; }
+    section { margin-bottom: 20px; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 5px; }
+    .loading { color: gray; }
+  </style>
+</head>
+<body>
+  <h1>🌱 Grow a Garden Stock Info</h1>
+  <p id="updated">Memuat data...</p>
+  <section>
+    <h2>🪴 Seed Shop</h2>
+    <ul id="seedShop"><li class="loading">Loading...</li></ul>
+  </section>
+  <section>
+    <h2>🛠️ Gear Shop</h2>
+    <ul id="gearShop"><li class="loading">Loading...</li></ul>
+  </section>
+  <section>
+    <h2>🥚 Egg Shop</h2>
+    <ul id="eggShop"><li class="loading">Loading...</li></ul>
+  </section>
+
+  <script>
+    fetch('/api/stocks')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('updated').innerText = '📅 Diperbarui: ' + data.updated;
+
+        const fillList = (id, items) => {
+          const el = document.getElementById(id);
+          el.innerHTML = '';
+          if (items.length === 0) {
+            el.innerHTML = '<li>Kosong</li>';
+          } else {
+            items.forEach(item => {
+              const li = document.createElement('li');
+              li.textContent = item;
+              el.appendChild(li);
+            });
+          }
+        };
+
+        fillList('seedShop', data.seed);
+        fillList('gearShop', data.gear);
+        fillList('eggShop', data.egg);
+      })
+      .catch(err => {
+        document.getElementById('updated').innerText = '❌ Gagal mengambil data.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
