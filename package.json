@@ -1,0 +1,15 @@
+{
+  "name": "growagarden-stock",
+  "version": "1.0.0",
+  "description": "Grow a Garden Stock Info",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "express": "^4.18.2",
+    "moment-timezone": "^0.5.40",
+    "node-fetch": "^2.6.7"
+  }
+}
