@@ -5,7 +5,7 @@
   <title>Grow a Garden Stock Info</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    * {
+     {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -204,7 +204,32 @@
       margin-top: 1rem;
     }
 
-    /* Responsive */
+    .map-button {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #00a2ff;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 162, 255, 0.2);
+    }
+
+    .map-button:hover {
+      background-color: #0085d6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 162, 255, 0.3);
+    }
+
+    .map-button i {
+      margin-right: 8px;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 1.5rem 1rem;
@@ -238,7 +263,6 @@
       }
     }
 
-    /* Dark mode support */
     @media (prefers-color-scheme: dark) {
       body {
         background: #0f0f0f;
@@ -277,9 +301,12 @@
       .shop-title {
         color: #e5e5e5;
       }
+
+      .map-button {
+        background-color: #006bb3;
+      }
     }
 
-    /* Smooth animations */
     .fade-in {
       animation: fadeIn 0.6s ease-out;
     }
@@ -311,6 +338,13 @@
         <i class="fab fa-roblox roblox-logo"></i>
       </h1>
       <p id="updated">Memuat data...</p>
+      
+      <a href="https://www.roblox.com/share?code=40b14bc60ad9dd4d8da5ccf959bd4ae8&type=ExperienceDetails&stamp=1749553712147" 
+         target="_blank" 
+         class="map-button fade-in"
+         style="animation-delay: 0.4s">
+        <i class="fas fa-map-marked-alt"></i> Pergi Ke Map Grow A Garden
+      </a>
     </header>
 
     <div class="grid">
@@ -368,7 +402,6 @@
           }
         };
 
-        // Add fade-in animation to cards
         document.querySelectorAll('.shop-card').forEach((card, index) => {
           card.classList.add('fade-in');
           card.style.animationDelay = `${index * 0.2}s`;
