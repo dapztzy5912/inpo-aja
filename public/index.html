@@ -2,10 +2,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Grow a Garden Stock Info</title>
+  <title>Grow a Garden Stock Info & Roblox Stalker</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-     {
+    * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -95,6 +95,189 @@
       display: inline-block;
       border: 1px solid #e8e8e8;
       box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .section-divider {
+      margin: 4rem 0;
+      text-align: center;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      color: #666;
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .roblox-stalker-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      color: white;
+      text-align: center;
+    }
+
+    .stalker-input-group {
+      max-width: 400px;
+      margin: 2rem auto;
+      position: relative;
+    }
+
+    .stalker-input {
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.95);
+      color: #333;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .stalker-input:focus {
+      outline: none;
+      box-shadow: 0 6px 30px rgba(0,0,0,0.15);
+      transform: translateY(-2px);
+    }
+
+    .stalker-button {
+      margin-top: 1rem;
+      padding: 0.875rem 2rem;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+    }
+
+    .stalker-button:hover {
+      background: #ff5252;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+    }
+
+    .stalker-button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .stalker-result {
+      margin-top: 2rem;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: none;
+    }
+
+    .stalker-result.show {
+      display: block;
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .stalker-profile {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .stalker-avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.3);
+      object-fit: cover;
+    }
+
+    .stalker-info {
+      flex: 1;
+      text-align: left;
+    }
+
+    .stalker-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stalker-username {
+      font-size: 1.1rem;
+      opacity: 0.9;
+      margin-bottom: 1rem;
+    }
+
+    .stalker-badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .badge-verified {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .badge-banned {
+      background: #f44336;
+      color: white;
+    }
+
+    .stalker-details {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .stalker-detail-item {
+      background: rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    .stalker-detail-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+      margin-bottom: 0.25rem;
+    }
+
+    .stalker-detail-value {
+      font-weight: 600;
+      font-size: 1rem;
     }
 
     .grid {
@@ -261,6 +444,19 @@
       .shop-card {
         padding: 1.5rem;
       }
+
+      .stalker-profile {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .stalker-info {
+        text-align: center;
+      }
+
+      .stalker-details {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (prefers-color-scheme: dark) {
@@ -299,6 +495,10 @@
       }
 
       .shop-title {
+        color: #e5e5e5;
+      }
+
+      .section-title {
         color: #e5e5e5;
       }
 
@@ -347,6 +547,38 @@
       </a>
     </header>
 
+    <!-- Roblox Stalker Section -->
+    <div class="roblox-stalker-section">
+      <div class="section-title" style="color: white;">🕵️ Roblox Stalker</div>
+      <div class="section-subtitle" style="color: rgba(255,255,255,0.9);">
+        Cari informasi profil pengguna Roblox dengan mudah
+      </div>
+      
+      <div class="stalker-input-group">
+        <input 
+          type="text" 
+          id="robloxUsername" 
+          class="stalker-input" 
+          placeholder="Masukkan username Roblox..."
+          onkeypress="handleEnterKey(event)"
+        >
+        <button class="stalker-button" onclick="searchRobloxUser()">
+          <i class="fas fa-search"></i> Cari Pengguna
+        </button>
+      </div>
+      
+      <div id="stalkerResult" class="stalker-result">
+        <!-- Results will be displayed here -->
+      </div>
+    </div>
+
+    <div class="section-divider">
+      <div class="section-title">📦 Stock Information</div>
+      <div class="section-subtitle">
+        Informasi stok terkini dari toko-toko di Grow a Garden
+      </div>
+    </div>
+
     <div class="grid">
       <div class="shop-card seed">
         <div class="shop-header">
@@ -381,6 +613,7 @@
   </div>
 
   <script>
+    // Load stock data
     fetch('/api/stocks')
       .then(res => res.json())
       .then(data => {
@@ -415,6 +648,128 @@
         document.getElementById('updated').innerHTML = '<span class="error-state">❌ Gagal mengambil data</span>';
         console.error(err);
       });
+
+    // Roblox Stalker functions
+    function handleEnterKey(event) {
+      if (event.key === 'Enter') {
+        searchRobloxUser();
+      }
+    }
+
+    async function searchRobloxUser() {
+      const username = document.getElementById('robloxUsername').value.trim();
+      const button = document.querySelector('.stalker-button');
+      const resultDiv = document.getElementById('stalkerResult');
+      
+      if (!username) {
+        alert('Masukkan username Roblox terlebih dahulu!');
+        return;
+      }
+
+      // Show loading state
+      button.disabled = true;
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencari...';
+      resultDiv.classList.remove('show');
+
+      try {
+        const response = await fetch('/api/roblox-stalk', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ username: username })
+        });
+
+        const data = await response.json();
+
+        if (data.status && data.shiroko) {
+          displayUserData(data.shiroko);
+        } else {
+          displayError(data.message || 'Pengguna tidak ditemukan');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        displayError('Terjadi kesalahan saat mencari pengguna');
+      } finally {
+        button.disabled = false;
+        button.innerHTML = '<i class="fas fa-search"></i> Cari Pengguna';
+      }
+    }
+
+    function displayUserData(user) {
+      const resultDiv = document.getElementById('stalkerResult');
+      
+      const onlineStatusText = user.userPresenceType === 1 ? 'Online' : 
+                              user.userPresenceType === 2 ? 'In Game' : 'Offline';
+      
+      const statusColor = user.userPresenceType === 1 ? '#4CAF50' : 
+                         user.userPresenceType === 2 ? '#FF9800' : '#757575';
+
+      resultDiv.innerHTML = `
+        <div class="stalker-profile">
+          <img src="${user.profileDetails}" alt="Avatar" class="stalker-avatar" onerror="this.src='https://via.placeholder.com/120x120/667eea/white?text=?'">
+          <div class="stalker-info">
+            <div class="stalker-name">${user.displayName}</div>
+            <div class="stalker-username">@${user.name}</div>
+            <div class="stalker-badges">
+              ${user.hasVerifiedBadge ? '<span class="badge badge-verified">✓ Verified</span>' : ''}
+              ${user.isBanned ? '<span class="badge badge-banned">⚠ Banned</span>' : ''}
+              <span class="badge" style="background: ${statusColor}; color: white;">
+                ${onlineStatusText}
+              </span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="stalker-details">
+          <div class="stalker-detail-item">
+            <div class="stalker-detail-label">User ID</div>
+            <div class="stalker-detail-value">${user.id}</div>
+          </div>
+          <div class="stalker-detail-item">
+            <div class="stalker-detail-label">Bergabung Sejak</div>
+            <div class="stalker-detail-value">${user.created}</div>
+          </div>
+          <div class="stalker-detail-item">
+            <div class="stalker-detail-label">Terakhir Online</div>
+            <div class="stalker-detail-value">${user.lastOnline}</div>
+          </div>
+          <div class="stalker-detail-item">
+            <div class="stalker-detail-label">Lokasi Terakhir</div>
+            <div class="stalker-detail-value">${user.lastLocation}</div>
+          </div>
+        </div>
+        
+        ${user.description && user.description !== 'No description' ? `
+          <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px; text-align: left;">
+            <div class="stalker-detail-label">Deskripsi</div>
+            <div class="stalker-detail-value" style="margin-top: 0.5rem; line-height: 1.5;">${user.description}</div>
+          </div>
+        ` : ''}
+        
+        <div style="margin-top: 1.5rem;">
+          <a href="https://www.roblox.com/users/${user.id}/profile" target="_blank" 
+             style="display: inline-block; padding: 0.75rem 1.5rem; background: #00a2ff; color: white; 
+                    text-decoration: none; border-radius: 25px; font-weight: 600; transition: all 0.3s ease;">
+            <i class="fas fa-external-link-alt"></i> Lihat Profil Roblox
+          </a>
+        </div>
+      `;
+      
+      resultDiv.classList.add('show');
+    }
+
+    function displayError(message) {
+      const resultDiv = document.getElementById('stalkerResult');
+      resultDiv.innerHTML = `
+        <div style="text-align: center; padding: 2rem;">
+          <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 1rem; opacity: 0.7;"></i>
+          <div style="font-size: 1.2rem; font-weight: 600; margin-bottom: 0.5rem;">Oops!</div>
+          <div style="opacity: 0.9;">${message}</div>
+        </div>
+      `;
+      resultDiv.classList.add('show');
+    }
   </script>
 </body>
 </html>
