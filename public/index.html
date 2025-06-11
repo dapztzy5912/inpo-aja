@@ -116,7 +116,7 @@
     }
 
     .roblox-stalker-section {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      background: linear-gradient(135deg, #eee 0%, #1a1a1a 100%);
       border-radius: 20px;
       padding: 3rem 2rem;
       margin: 3rem 0;
@@ -547,7 +547,6 @@
       </a>
     </header>
 
-    <!-- Roblox Stalker Section -->
     <div class="roblox-stalker-section">
       <div class="section-title" style="color: white;">🕵️ Roblox Stalker</div>
       <div class="section-subtitle" style="color: rgba(255,255,255,0.9);">
@@ -568,7 +567,7 @@
       </div>
       
       <div id="stalkerResult" class="stalker-result">
-        <!-- Results will be displayed here -->
+
       </div>
     </div>
 
@@ -613,7 +612,6 @@
   </div>
 
   <script>
-    // Load stock data
     fetch('/api/stocks')
       .then(res => res.json())
       .then(data => {
@@ -649,7 +647,6 @@
         console.error(err);
       });
 
-    // Roblox Stalker functions
     function handleEnterKey(event) {
       if (event.key === 'Enter') {
         searchRobloxUser();
@@ -666,7 +663,6 @@
         return;
       }
 
-      // Show loading state
       button.disabled = true;
       button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mencari...';
       resultDiv.classList.remove('show');
